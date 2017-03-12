@@ -17,28 +17,21 @@ public class RcvActivity extends AppCompatActivity implements SensorEventListene
     Button button;
     private TextView t;
     private TextView t2;
-    private EditText enterTh;
     private Sensor mySense;
-    private SensorManager SM;
-    public int v2, thr;
+    private SensorManager SM, SM2;
+    public int v2 ;
 
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        //threshold value update test
-        t2 = (TextView) findViewById(R.id.textView6);
-        t2.setText("Threshold= " + thr);
-
-
         v2 = (int) event.values[0];
-        //v.setText("Hello"+v2);
 
-        if (v2 >= thr) {
+        if (v2 >= 1000) {
             //interpret 1
-            t.setText("ONE where" + v2);
+            t.setText("ONE where " + v2);
         } else {
             //interpret 0
-            t.setText("ZERO where" + v2);
+            t.setText("ZERO where " + v2);
         }
     }
 
@@ -62,17 +55,7 @@ public class RcvActivity extends AppCompatActivity implements SensorEventListene
         SM.registerListener(this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
 
         t = (TextView) findViewById(R.id.textView4);
-        enterTh = (EditText) findViewById(R.id.editText2);
 
-        thr = 100;
-        String str = enterTh.getText().toString();
-        if (!str.equals("") && str.matches("^\\d+$")) {
-            thr = Integer.parseInt(str);
-        }
 
     }
-    public void onClick(View v) {
-        SM.registerListener(this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
 }
