@@ -45,12 +45,24 @@
         android:background="@android:color/holo_orange_light" />
 
     <Button
+        android:text="SEND NEW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/send"
+        android:layout_below="@+id/button_recieve"
+        android:layout_toRightOf="@+id/button_send"
+        android:layout_toEndOf="@+id/button_send"
+        android:layout_marginTop="43dp"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="16dp" />
+
+    <Button
         android:text="SEND"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="21dp"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="41dp"
         android:id="@+id/button_send"
         android:background="@android:color/holo_red_light"
         android:layout_below="@+id/textView"

@@ -5,9 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.graphics.Camera;
+//import android.graphics.Camera;
 import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraDevice;
+//import android.hardware.camera2.CameraDevice;
 import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Handler;
@@ -100,6 +100,18 @@ public class SendActivity extends AppCompatActivity {
             {
                 mCameraManager.setTorchMode(mCameraId,true);
             }
+            else
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(SendActivity.this).create();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage("Lollipop karne nai hua!!");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialogInterface,int which){
+                        finish();
+                    }
+                });
+                alertDialog.show();
+            }
             }catch (Exception e)
             {
                 e.printStackTrace();
@@ -111,6 +123,18 @@ public class SendActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
             {
                 mCameraManager.setTorchMode(mCameraId,false);
+            }
+            else
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(SendActivity.this).create();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage("Lollipop karne nai hua!!");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialogInterface,int which){
+                        finish();
+                    }
+                });
+                alertDialog.show();
             }
         }catch (Exception e)
         {
@@ -128,6 +152,6 @@ public class SendActivity extends AppCompatActivity {
 
                 turnOffFlash();
             }
-        }, 3000);
+        }, 2000);
     }
 }
