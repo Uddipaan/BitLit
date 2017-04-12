@@ -27,7 +27,7 @@ public class Send_new extends AppCompatActivity {
     private CameraManager mCameraManager;
     private String mCameraId;
     private boolean hasFlash;
-
+    public int m = 0;
 
     @Override
     @TargetApi(21)
@@ -39,8 +39,8 @@ public class Send_new extends AppCompatActivity {
         btn_0 = (Button) findViewById(R.id.zero_btn);
         btn_clr = (Button) findViewById(R.id.clr_btn);
         btn_send = (Button) findViewById(R.id.Send);
+        test = (TextView) findViewById(R.id.textView6);
 
-        test = (TextView) findViewById(R.id.textView6); //test
 
         //camera flash configurations
         hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
@@ -123,6 +123,7 @@ public class Send_new extends AppCompatActivity {
             @Override
             public void onClick( View v) {
                 try {
+                    n=-1;
                     clr();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -130,15 +131,54 @@ public class Send_new extends AppCompatActivity {
             }
         });
 
+
         btn_send.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
                 try {
-                    lightsend();
-                } catch (Exception e) {
+                    final Handler handler = new Handler();
+                    for(int x=0; x<bitstring.length; x=x+1) {
+
+                        handler.postDelayed(new Runnable() {
+
+
+                            public void run()
+                            {
+
+                                if(bitstring[m]=="1")
+                                {
+                                    turnOnFlash();
+
+                                }
+                                else if(bitstring[m]=="0")
+                                {
+                                    turnOffFlash();
+                                }
+
+                                int temp;
+                                temp=m+1;
+                                test.setText("Sending element "+temp+" of the string.");
+                                m++;
+                                delay();
+
+                            }
+
+                        }, 2000*x);
+
+
+                    }
+
+                    m=0;
+
+
+                }
+                catch (Exception e) {
                     e.printStackTrace();
                 }
+
+
+
             }
         });
 
@@ -182,84 +222,13 @@ public class Send_new extends AppCompatActivity {
             bitstring[i] = " ";
         }
         t.setText(" "+bitstring[0]+" "+bitstring[1]+" "+bitstring[2]+" "+bitstring[3]);
-        n=-1;
+
     }
 
 
-    public void lightsend()
-    {
-        int o,z;
-        o=0;
-        z=0;
-        int i=0;
-        while( i<bitstring.length)
-        {
 
-            if(bitstring[i] == "1")
-            {
-                turnOnFlash();
-                //delay();
-                //t.setText("i1 = "+i);
-                final Handler handler = new Handler();
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
-                        turnOffFlash();
-                        handler.postDelayed(this,2000);
-                    }
-                });
-                o=o+1;
 
-            }
-            else if(bitstring[i] == "0")
-            {
-                turnOffFlash();
-                final Handler handler = new Handler();
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Do something after 5s = 5000ms
-                        turnOffFlash();
-                        handler.postDelayed(this,2000);
-                    }
-                });
-                //t.setText("i0 = "+i);
-                z=z+1;
-            }
-            i++;
-        }
-        test.setText("No. of ones: "+o+"No. of zeros: "+z);    //test
-    }
 
-    public void delay()
-    {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                turnOffFlash();
-
-            }
-        }, 1000);
-    }
-    public void delay2()
-    {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                AlertDialog alertDialog = new AlertDialog.Builder(Send_new.this).create();
-                alertDialog.setTitle("Delay");
-                alertDialog.setMessage("Delay working");
-
-                alertDialog.show();
-
-            }
-        }, 2000);
-    }
 
     public void turnOnFlash()
     {
@@ -310,5 +279,48 @@ public class Send_new extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+    public void delay() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                turnOffFlash();
+                test.setText("Sending Completed Successfully!");
+            }
+        }, 8000);
+    }
+    /*
+    //DUMP
+
+
+
+    public void delay2()
+    {
+
+
+        AlertDialog alertDialog = new AlertDialog.Builder(Send_new.this).create();
+        alertDialog.setTitle("Delay");
+        alertDialog.setMessage("Delay working");
+
+        alertDialog.show();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, 5000);
+    }
+
+    public void lightsend()
+    {
+        turnOnFlash();
+
+    }
+    */
 
 }

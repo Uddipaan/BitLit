@@ -64,12 +64,12 @@
         android:id="@+id/Send" />
 
     <TextView
-        android:text="Test"
+        android:text=" "
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:id="@+id/textView6"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="67dp"
-        android:id="@+id/textView6" />
+        android:layout_marginBottom="53dp" />
 
 </RelativeLayout>
