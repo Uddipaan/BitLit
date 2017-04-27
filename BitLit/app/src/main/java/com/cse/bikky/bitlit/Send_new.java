@@ -22,7 +22,7 @@ public class Send_new extends AppCompatActivity {
 
     public TextView t, test;
     private Button btn_1, btn_0, btn_clr, btn_send;
-    public String [] bitstring = new String[4];
+    public String [] bitstring = new String[8];
     public int n = -1;
     private CameraManager mCameraManager;
     private String mCameraId;
@@ -65,7 +65,7 @@ public class Send_new extends AppCompatActivity {
         }
 
         //initializing the bit string to be null
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 8; i++) {
             bitstring[i] = " ";
         }
 
@@ -76,14 +76,14 @@ public class Send_new extends AppCompatActivity {
             public void onClick( View v) {
                 try {
                     n = n + 1;
-                    if(n<4) {
+                    if(n<8) {
 
                         one_input();
                     }
                     else {
                         AlertDialog alertDialog = new AlertDialog.Builder(Send_new.this).create();
                         alertDialog.setTitle("Error");
-                        alertDialog.setMessage("Not more than 4 bits");
+                        alertDialog.setMessage("Not more than 8 bits");
 
                         alertDialog.show();
                     }
@@ -98,7 +98,7 @@ public class Send_new extends AppCompatActivity {
             public void onClick( View v) {
                 try {
                     n = n + 1;
-                    if(n<4) {
+                    if(n<8) {
 
                         zero_input();
                     }
@@ -106,7 +106,7 @@ public class Send_new extends AppCompatActivity {
                     {
                         AlertDialog alertDialog = new AlertDialog.Builder(Send_new.this).create();
                         alertDialog.setTitle("Error");
-                        alertDialog.setMessage("Not more than 4 bits");
+                        alertDialog.setMessage("Not more than 8 bits");
 
                         alertDialog.show();
                     }
@@ -136,48 +136,8 @@ public class Send_new extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                try {
-                    final Handler handler = new Handler();
-                    for(int x=0; x<bitstring.length; x=x+1) {
 
-                        handler.postDelayed(new Runnable() {
-
-
-                            public void run()
-                            {
-
-                                if(bitstring[m]=="1")
-                                {
-                                    turnOnFlash();
-
-                                }
-                                else if(bitstring[m]=="0")
-                                {
-                                    turnOffFlash();
-                                }
-
-                                int temp;
-                                temp=m+1;
-                                test.setText("Sending element "+temp+" of the string.");
-                                m++;
-                                delay();
-
-                            }
-
-                        }, 2000*x);
-
-
-                    }
-
-                    m=0;
-
-
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
+                sendbit();
 
             }
         });
@@ -212,16 +172,16 @@ public class Send_new extends AppCompatActivity {
     public void disp_array()
     {
 
-        t.setText(bitstring[0]+bitstring[1]+bitstring[2]+bitstring[3]);
+        t.setText(bitstring[0]+bitstring[1]+bitstring[2]+bitstring[3]+bitstring[4]+bitstring[5]+bitstring[6]+bitstring[7]);
     }
 
     public void clr()
     {
-        for(int i = 0; i < 4 ; i++)
+        for(int i = 0; i < 8 ; i++)
         {
             bitstring[i] = " ";
         }
-        t.setText(" "+bitstring[0]+" "+bitstring[1]+" "+bitstring[2]+" "+bitstring[3]);
+        t.setText(" "+bitstring[0]+" "+bitstring[1]+" "+bitstring[2]+" "+bitstring[3]+" "+bitstring[4]+" "+bitstring[5]+" "+bitstring[6]+" "+bitstring[7]);
 
     }
 
@@ -291,8 +251,58 @@ public class Send_new extends AppCompatActivity {
                 turnOffFlash();
                 test.setText("Sending Completed Successfully!");
             }
-        }, 8000);
+        }, 4000);
     }
+
+
+    public void sendbit(){
+
+        try {
+            final Handler handler = new Handler();
+            for(int x=0; x<bitstring.length; x=x+1) {
+
+                handler.postDelayed(new Runnable() {
+
+
+                    public void run()
+                    {
+
+                        if(bitstring[m]=="1")
+                        {
+                            turnOnFlash();
+
+                        }
+                        else if(bitstring[m]=="0")
+                        {
+                            turnOffFlash();
+                        }
+
+                        int temp;
+                        temp=m+1;
+                        test.setText("Sending element "+temp+" of the string.");
+                        m++;
+                        delay();
+
+                    }
+
+                }, 500*x);
+
+
+            }
+
+            m=0;
+
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
     /*
     //DUMP
 

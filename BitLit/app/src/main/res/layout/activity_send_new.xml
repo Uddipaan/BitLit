@@ -9,19 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cse.bikky.bitlit.Send_new"
-    android:background="@android:color/darker_gray">
-
-    <Button
-        android:text="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="158dp"
-        android:id="@+id/one_btn" />
+    android:background="@color/colorPrimary">
 
     <Button
         android:text="0"
@@ -32,17 +20,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginRight="33dp"
         android:layout_marginEnd="33dp"
-        android:id="@+id/zero_btn" />
-
-    <TextView
-        android:layout_width="300dp"
-        android:id="@+id/textView7"
-        android:layout_height="50dp"
-        android:layout_above="@+id/zero_btn"
-        android:layout_alignLeft="@+id/one_btn"
-        android:layout_alignStart="@+id/one_btn"
-        android:layout_marginBottom="50dp"
-        android:text="String" />
+        android:id="@+id/zero_btn"
+        android:background="@drawable/round_btn" />
 
     <Button
         android:text="Clear"
@@ -52,7 +31,8 @@
         android:layout_alignLeft="@+id/one_btn"
         android:layout_alignStart="@+id/one_btn"
         android:layout_marginTop="56dp"
-        android:id="@+id/clr_btn" />
+        android:id="@+id/clr_btn"
+        android:background="@drawable/round_btn" />
 
     <Button
         android:text="Send"
@@ -61,15 +41,37 @@
         android:layout_alignBottom="@+id/clr_btn"
         android:layout_alignLeft="@+id/zero_btn"
         android:layout_alignStart="@+id/zero_btn"
-        android:id="@+id/Send" />
+        android:id="@+id/Send"
+        android:background="@drawable/round_btn" />
+
+    <Button
+        android:text="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="74dp"
+        android:id="@+id/one_btn"
+        android:background="@drawable/round_btn"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:id="@+id/textView7"
+        android:layout_height="50dp"
+        android:text="String"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/zero_btn"
+        android:layout_alignEnd="@+id/zero_btn"
+        android:layout_marginTop="19dp" />
 
     <TextView
         android:text=" "
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:id="@+id/textView6"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/clr_btn"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="53dp" />
+        android:layout_marginTop="44dp" />
 
 </RelativeLayout>

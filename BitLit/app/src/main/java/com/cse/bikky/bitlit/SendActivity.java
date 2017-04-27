@@ -30,6 +30,13 @@ public class SendActivity extends AppCompatActivity {
     @Override
     @TargetApi(21)
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send);
         hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);

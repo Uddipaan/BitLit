@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cse.bikky.bitlit.SendActivity"
-    android:background="@android:color/holo_red_light">
+    android:background="@color/colorPrimary">
 
     <TextView
         android:text="SENDING"
@@ -42,9 +42,8 @@
         android:text="Confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/BinaryInput"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
         android:id="@+id/button"
-        android:backgroundTint="@android:color/holo_green_dark" />
+        android:background="@drawable/round_btn"
+        android:layout_below="@+id/BinaryInput"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

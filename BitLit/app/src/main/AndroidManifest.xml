@@ -24,6 +24,8 @@
         <activity android:name=".SendActivity" />
         <activity android:name=".RcvActivity" />
         <activity android:name=".Send_new" />
+        <activity android:name=".intermediate_send" />
+        <activity android:name=".Send_char"></activity>
     </application>
 
 </manifest>

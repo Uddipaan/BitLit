@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cse.bikky.bitlit.MainActivity"
-    android:background="@android:color/holo_blue_light">
+    android:background="@color/colorPrimary">
 
     <TextView
         android:text="Welcome to BITLIT "
@@ -19,19 +19,8 @@
         android:id="@+id/textView"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="RECIEVE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button_send"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginRight="17dp"
-        android:layout_marginEnd="17dp"
-        android:id="@+id/button_recieve"
-        android:background="@android:color/holo_green_light" />
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary" />
 
     <Button
         android:text="EXIT"
@@ -42,29 +31,36 @@
         android:layout_toEndOf="@+id/button_send"
         android:layout_marginBottom="73dp"
         android:id="@+id/button_exit"
-        android:background="@android:color/holo_orange_light" />
+        android:background="@color/colorAccent" />
 
     <Button
         android:text="SEND NEW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/send"
-        android:layout_below="@+id/button_recieve"
-        android:layout_toRightOf="@+id/button_send"
-        android:layout_toEndOf="@+id/button_send"
-        android:layout_marginTop="43dp"
         android:background="@color/colorPrimaryDark"
-        android:elevation="16dp" />
+        android:elevation="16dp"
+        android:layout_marginBottom="80dp"
+        android:layout_above="@+id/button_exit"
+        android:layout_toRightOf="@+id/button_send"
+        android:layout_toEndOf="@+id/button_send" />
+
+    <Button
+        android:text="RECIEVE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_recieve"
+        android:background="@drawable/round_btn"
+        android:layout_below="@+id/textView"
+        android:layout_toRightOf="@+id/send"
+        android:layout_toEndOf="@+id/send" />
 
     <Button
         android:text="SEND"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="21dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="41dp"
         android:id="@+id/button_send"
-        android:background="@android:color/holo_red_light"
+        android:background="@drawable/round_btn"
         android:layout_below="@+id/textView"
         android:layout_alignLeft="@+id/textView"
         android:layout_alignStart="@+id/textView" />

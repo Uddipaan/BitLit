@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         button4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
-                Intent MyIntent = new Intent(MainActivity.this, Send_new.class);
+                Intent MyIntent = new Intent(MainActivity.this, intermediate_send.class);
                 startActivity(MyIntent);
             }
 
