@@ -21,15 +21,19 @@ import android.widget.TextView;
 
 public class Send_char extends AppCompatActivity {
 
-    EditText txt;
+
     public String [] bitstring = new String[8];
     public String [] inputstring = new String[10];
     private CameraManager mCameraManager;
     private String mCameraId;
     private boolean hasFlash;
     public int m=0;
-    Button btn_snd;
-    public TextView test;
+    Button btn_clc, btn_cntc, btn_gal, rst;
+    public TextView t;
+
+    // FOR CALCULATOR STRING IS 10101010
+    // FOR GALLERY STRING IS 01010101
+    // FOR CONTACTS STRING IS 11110000
 
 
 
@@ -41,15 +45,267 @@ public class Send_char extends AppCompatActivity {
         setContentView(R.layout.activity_send_char);
 
 
-        txt = (EditText)findViewById(R.id.ipstr);
+        btn_clc=(Button)findViewById(R.id.btn_calc);
+        btn_gal=(Button)findViewById(R.id.btn_gal);
+        btn_cntc=(Button)findViewById(R.id.btn_cntc);
+        rst=(Button)findViewById(R.id.rst);
 
-        btn_snd = (Button)findViewById(R.id.snd_chr);
-
-        test = (TextView) findViewById(R.id.tv);
+        t = (TextView)findViewById(R.id.txtv);
 
 
 
+        //camera flash configurations
+        hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
+        mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
+        try {
+            mCameraId = mCameraManager.getCameraIdList()[0];
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
 
+        if (!hasFlash) {
+
+            AlertDialog alertDialog = new AlertDialog.Builder(Send_char.this).create();
+            alertDialog.setTitle("Error");
+            alertDialog.setMessage("No flash found in you device!!");
+            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialogInterface, int which) {
+                    finish();
+                }
+            });
+            alertDialog.show();
+        }
+
+        rst.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                for(int i = 0; i < 8 ; i++)
+                {
+                    bitstring[i] = " ";
+                }
+                m=0;
+
+            }
+        });
+
+
+        btn_clc.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                bitstring[0]="1";
+                bitstring[1]="0";
+                bitstring[2]="1";
+                bitstring[3]="0";
+                bitstring[4]="1";
+                bitstring[5]="0";
+                bitstring[6]="1";
+                bitstring[7]="0";
+
+                sendbit();
+
+
+            }
+        });
+
+        btn_gal.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                bitstring[0]="0";
+                bitstring[1]="1";
+                bitstring[2]="0";
+                bitstring[3]="1";
+                bitstring[4]="0";
+                bitstring[5]="1";
+                bitstring[6]="0";
+                bitstring[7]="1";
+
+                sendbit();
+
+
+            }
+        });
+
+        btn_cntc.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                bitstring[0]="1";
+                bitstring[1]="1";
+                bitstring[2]="1";
+                bitstring[3]="1";
+                bitstring[4]="0";
+                bitstring[5]="0";
+                bitstring[6]="0";
+                bitstring[7]="0";
+
+                sendbit();
+
+
+            }
+        });
+
+
+
+
+
+    }
+
+
+
+
+    public void turnOnFlash()
+    {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
+                mCameraManager.setTorchMode(mCameraId,true);
+            }
+            else
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(Send_char.this).create();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage("Lollipop karne nai hua!!");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialogInterface,int which){
+                        finish();
+                    }
+                });
+                alertDialog.show();
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+    public void turnOffFlash()
+    {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            {
+                mCameraManager.setTorchMode(mCameraId,false);
+            }
+            else
+            {
+                AlertDialog alertDialog = new AlertDialog.Builder(Send_char.this).create();
+                alertDialog.setTitle("Error");
+                alertDialog.setMessage("Lollipop karne nai hua!!");
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialogInterface,int which){
+                        finish();
+                    }
+                });
+                alertDialog.show();
+            }
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void sendbit(){
+
+        try {
+            final Handler handler = new Handler();
+            for(int x=0; x<bitstring.length; x=x+1) {
+
+                handler.postDelayed(new Runnable() {
+
+
+                    public void run()
+                    {
+
+                        if(bitstring[m]=="1")
+                        {
+                            turnOnFlash();
+
+                        }
+                        else if(bitstring[m]=="0")
+                        {
+                            turnOffFlash();
+                        }
+
+                        m++;
+                        int temp;
+                        temp=m;
+                        t.setText("Sending element "+temp+" of the string.");
+
+                        delay();
+
+                    }
+
+                }, 500*x);
+
+
+            }
+
+            m=0;
+
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
+    public void delay() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                turnOffFlash();
+                t.setText("Sending Completed Successfully!");
+
+            }
+        }, 4000);
+    }
+
+
+
+}
+
+
+//GRAVEYARD
+/*
         btn_snd.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -867,182 +1123,4 @@ public class Send_char extends AppCompatActivity {
 
             }
         });
-
-
-        //camera flash configurations
-        hasFlash = getApplicationContext().getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
-        mCameraManager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
-        try {
-            mCameraId = mCameraManager.getCameraIdList()[0];
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
-
-        if (!hasFlash) {
-
-            AlertDialog alertDialog = new AlertDialog.Builder(Send_char.this).create();
-            alertDialog.setTitle("Error");
-            alertDialog.setMessage("No flash found in you device!!");
-            alertDialog.setButton(Dialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialogInterface, int which) {
-                    finish();
-                }
-            });
-            alertDialog.show();
-        }
-
-
-
-
-
-
-
-
-
-    }
-
-
-
-
-    public void turnOnFlash()
-    {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            {
-                mCameraManager.setTorchMode(mCameraId,true);
-            }
-            else
-            {
-                AlertDialog alertDialog = new AlertDialog.Builder(Send_char.this).create();
-                alertDialog.setTitle("Error");
-                alertDialog.setMessage("Lollipop karne nai hua!!");
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialogInterface,int which){
-                        finish();
-                    }
-                });
-                alertDialog.show();
-            }
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
-
-
-
-    public void turnOffFlash()
-    {
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            {
-                mCameraManager.setTorchMode(mCameraId,false);
-            }
-            else
-            {
-                AlertDialog alertDialog = new AlertDialog.Builder(Send_char.this).create();
-                alertDialog.setTitle("Error");
-                alertDialog.setMessage("Lollipop karne nai hua!!");
-                alertDialog.setButton(Dialog.BUTTON_POSITIVE,"OK",new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialogInterface,int which){
-                        finish();
-                    }
-                });
-                alertDialog.show();
-            }
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void sendbit(){
-
-        try {
-            final Handler handler = new Handler();
-            for(int x=0; x<bitstring.length; x=x+1) {
-
-                handler.postDelayed(new Runnable() {
-
-
-                    public void run()
-                    {
-
-                        if(bitstring[m]=="1")
-                        {
-                            turnOnFlash();
-
-                        }
-                        else if(bitstring[m]=="0")
-                        {
-                            turnOffFlash();
-                        }
-
-                        m++;
-                        int temp;
-                        temp=m+1;
-                        test.setText("Sending element "+temp+" of the string.");
-                        m++;
-                        delay();
-
-                    }
-
-                }, 500*x);
-
-
-            }
-
-            m=0;
-
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-
-
-    public void delay() {
-
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                turnOffFlash();
-                test.setText("Sending Completed Successfully!");
-
-            }
-        }, 4000);
-    }
-
-
-
-}
+*/

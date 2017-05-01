@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -9,18 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cse.bikky.bitlit.MainActivity"
-    android:background="@color/colorPrimary">
-
-    <TextView
-        android:text="Welcome to BITLIT "
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:id="@+id/textView"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimary" />
+    android:background="?attr/colorButtonNormal">
 
     <Button
         android:text="EXIT"
@@ -34,16 +22,38 @@
         android:background="@color/colorAccent" />
 
     <Button
+        android:text="SEND"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_send"
+        android:background="@drawable/round_btn"
+        android:layout_alignBaseline="@+id/button_recieve"
+        android:layout_alignBottom="@+id/button_recieve"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <TextView
+        android:text="Welcome to BITLIT "
+        android:layout_width="300dp"
+        android:id="@+id/textView"
+        android:gravity="center"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:background="?attr/colorButtonNormal"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
         android:text="SEND NEW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/send"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/round_btn"
         android:elevation="16dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="45dp"
         android:layout_above="@+id/button_exit"
-        android:layout_toRightOf="@+id/button_send"
-        android:layout_toEndOf="@+id/button_send" />
+        android:layout_alignLeft="@+id/button_send"
+        android:layout_alignStart="@+id/button_send" />
 
     <Button
         android:text="RECIEVE"
@@ -51,17 +61,18 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_recieve"
         android:background="@drawable/round_btn"
-        android:layout_below="@+id/textView"
-        android:layout_toRightOf="@+id/send"
-        android:layout_toEndOf="@+id/send" />
+        android:layout_marginBottom="17dp"
+        android:layout_above="@+id/send"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 
     <Button
-        android:text="SEND"
+        android:text="RECV NEW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button_send"
-        android:background="@drawable/round_btn"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignBottom="@+id/send"
+        android:layout_alignRight="@+id/button_recieve"
+        android:layout_alignEnd="@+id/button_recieve"
+        android:id="@+id/btn_rcvnw"
+        android:background="@drawable/round_btn" />
 </RelativeLayout>

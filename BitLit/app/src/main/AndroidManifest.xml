@@ -25,7 +25,10 @@
         <activity android:name=".RcvActivity" />
         <activity android:name=".Send_new" />
         <activity android:name=".intermediate_send" />
-        <activity android:name=".Send_char"></activity>
+        <activity android:name=".Send_char" />
+        <activity android:name=".intermediate_recv" />
+        <activity android:name=".fnc_recv" />
+        <activity android:name=".rcv_bit"></activity>
     </application>
 
 </manifest>

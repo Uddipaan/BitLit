@@ -7,31 +7,23 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cse.bikky.bitlit.intermediate_send"
-    android:background="?attr/colorButtonNormal">
+    tools:context="com.cse.bikky.bitlit.fnc_recv">
 
     <Button
-        android:text="FUNCTIONS"
+        android:text="Start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="90dp"
+        android:id="@+id/btn2strt"
+        android:background="@drawable/round_btn" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="96dp"
-        android:id="@+id/snd_chr"
-        android:background="@drawable/round_btn">
-
-    </Button>
-
-    <Button
-        android:text="Send Bit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:id="@+id/bit"
-        android:background="@drawable/round_btn"
-        android:layout_below="@+id/snd_chr"
-        android:layout_alignLeft="@+id/snd_chr"
-        android:layout_alignStart="@+id/snd_chr">
-
-    </Button>
+        android:layout_marginTop="122dp"
+        android:id="@+id/txt2" />
 </RelativeLayout>
