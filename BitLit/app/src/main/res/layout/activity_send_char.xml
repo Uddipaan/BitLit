@@ -34,12 +34,13 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="27dp"
         android:id="@+id/txtv" />
 
     <Button
-        android:text="Calculator"
+        android:text="Messaging"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btn_calc"

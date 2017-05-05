@@ -1,5 +1,6 @@
 package com.cse.bikky.bitlit;
 
+import android.annotation.TargetApi;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -21,7 +22,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
     TextView t, tst;
     public String [] bitstring = new String[8];
     int iterator = 0;
-
+    @TargetApi(21)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +59,11 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
                                 mySense = SM.getDefaultSensor(Sensor.TYPE_LIGHT);
                                 //this requires the main class to implement sensorEventListener
                                 //register listener
-                                SM.registerListener(rcv_bit.this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
+
+                                SM.registerListener(rcv_bit.this, mySense, 1000,1000);
                             }
                         }, 500);
+                    SM.unregisterListener(rcv_bit.this, mySense);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -102,6 +105,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
                 bitstring[iterator] = "0";
 
                 iterator++;
+
                 //display the array
                 disp_array();
 
@@ -111,6 +115,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
             else
             {
                 tst.setText("Text recieved successfully");
+                SM.unregisterListener(rcv_bit.this, mySense);
             }
 
 

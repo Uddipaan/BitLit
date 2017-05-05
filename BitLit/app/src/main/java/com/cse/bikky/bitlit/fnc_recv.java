@@ -1,5 +1,6 @@
 package com.cse.bikky.bitlit;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 public class fnc_recv extends AppCompatActivity implements SensorEventListener {
     private Sensor mySense;
     private SensorManager SM;
@@ -20,6 +23,7 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
     public String [] bitstring = new String[8];
     int iterator = 0;
 
+    @TargetApi(21)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +56,13 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
                             mySense = SM.getDefaultSensor(Sensor.TYPE_LIGHT);
                             //this requires the main class to implement sensorEventListener
                             //register listener
-                            SM.registerListener(fnc_recv.this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
+                            SM.registerListener(fnc_recv.this, mySense, 1000,1000);
 
                         }
                     }, 500);
                     SM.unregisterListener(fnc_recv.this, mySense);
+
+
                 }
 
                 catch (Exception e) {
@@ -101,22 +107,8 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
         }
         else
         {
-
-            String res = String.valueOf(bitstring);
-
-            switch(res){
-                case "10101010":
-                    openCalc();
-                    break;
-                case "01010101":
-                    openGlry();
-                    break;
-                case "00000000":
-                    openCntc();
-                    break;
-                default:
-                    break;
-            }
+            fnc();
+            SM.unregisterListener(fnc_recv.this, mySense);
         }
 
 
@@ -138,12 +130,12 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
 
 
 
-    public void openCalc(){
+    public void openMsg(){
         //intent to open calculator
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_APP_CALCULATOR);
+        intent.addCategory(Intent.CATEGORY_APP_MESSAGING);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -164,5 +156,25 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
         intent.addCategory(Intent.CATEGORY_APP_GALLERY);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    public void fnc()
+    {
+        String res = Arrays.toString(bitstring);
+
+        switch(res){
+            case "[1, 0, 1, 0, 1, 0, 1, 0]":
+                openMsg();
+                break;
+            case "[0, 1, 0, 1, 0, 1, 0, 1]":
+                openGlry();
+                break;
+            case "[0, 0, 0, 0, 0, 0, 0, 0]":
+                openCntc();
+                break;
+            default:
+                t.setText("Nothing");
+                break;
+        }
     }
 }
