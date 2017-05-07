@@ -18,7 +18,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="96dp"
         android:id="@+id/snd_chr"
-        android:background="@drawable/round_btn">
+        android:background="@drawable/round_btn"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold">
 
     </Button>
 
@@ -31,7 +33,9 @@
         android:background="@drawable/round_btn"
         android:layout_below="@+id/snd_chr"
         android:layout_alignLeft="@+id/snd_chr"
-        android:layout_alignStart="@+id/snd_chr">
+        android:layout_alignStart="@+id/snd_chr"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold">
 
     </Button>
 </RelativeLayout>

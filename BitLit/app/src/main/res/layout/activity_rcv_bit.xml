@@ -13,18 +13,14 @@
     <TextView
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:textSize="15dp"
+        android:id="@+id/tst"
+        android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="98dp"
-        android:id="@+id/txtvw2" />
-
-    <TextView
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="24dp"
-        android:id="@+id/tst"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 
     <Button
         android:text="START"
@@ -34,6 +30,21 @@
         android:id="@+id/strt"
         android:background="@drawable/round_btn"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:id="@+id/txtvw2"
+        android:layout_marginTop="67dp"
+        android:layout_below="@+id/tst"
+        android:layout_alignLeft="@+id/tst"
+        android:layout_alignStart="@+id/tst"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 
 </RelativeLayout>

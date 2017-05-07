@@ -17,13 +17,32 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="90dp"
         android:id="@+id/btn2strt"
-        android:background="@drawable/round_btn" />
+        android:background="@drawable/round_btn"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 
     <TextView
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:textSize="15dp"
+        android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="122dp"
-        android:id="@+id/txt2" />
+        android:layout_marginTop="31dp"
+        android:id="@+id/t2"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:id="@+id/txt2"
+        android:layout_marginTop="63dp"
+        android:layout_below="@+id/t2"
+        android:layout_alignLeft="@+id/t2"
+        android:layout_alignStart="@+id/t2"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 </RelativeLayout>

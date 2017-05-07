@@ -19,7 +19,9 @@
         android:layout_alignStart="@+id/btn_fnc"
         android:layout_marginBottom="126dp"
         android:id="@+id/btn_bits"
-        android:background="@drawable/round_btn" />
+        android:background="@drawable/round_btn"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 
     <Button
         android:text="Functions"
@@ -29,5 +31,7 @@
         android:id="@+id/btn_fnc"
         android:background="@drawable/round_btn"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 </RelativeLayout>

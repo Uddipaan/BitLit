@@ -30,7 +30,9 @@
         android:layout_alignBaseline="@+id/button_recieve"
         android:layout_alignBottom="@+id/button_recieve"
         android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignStart="@+id/textView"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 
     <TextView
         android:text="Welcome to BITLIT "
@@ -41,7 +43,9 @@
         android:background="?attr/colorButtonNormal"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:fontFamily="casual" />
 
     <Button
         android:text="SEND NEW"
@@ -53,7 +57,9 @@
         android:layout_marginBottom="45dp"
         android:layout_above="@+id/button_exit"
         android:layout_alignLeft="@+id/button_send"
-        android:layout_alignStart="@+id/button_send" />
+        android:layout_alignStart="@+id/button_send"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 
     <Button
         android:text="RECIEVE"
@@ -64,7 +70,9 @@
         android:layout_marginBottom="17dp"
         android:layout_above="@+id/send"
         android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
+        android:layout_alignEnd="@+id/textView"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 
     <Button
         android:text="RECV NEW"
@@ -74,5 +82,7 @@
         android:layout_alignRight="@+id/button_recieve"
         android:layout_alignEnd="@+id/button_recieve"
         android:id="@+id/btn_rcvnw"
-        android:background="@drawable/round_btn" />
+        android:background="@drawable/round_btn"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold" />
 </RelativeLayout>

@@ -60,7 +60,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
                                 //this requires the main class to implement sensorEventListener
                                 //register listener
 
-                                SM.registerListener(rcv_bit.this, mySense, 1000,1000);
+                                SM.registerListener(rcv_bit.this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
                             }
                         }, 500);
                     SM.unregisterListener(rcv_bit.this, mySense);
@@ -85,10 +85,68 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
 
 
     @Override
-    public void onSensorChanged(SensorEvent event) {
-        int v2 = (int) event.values[0];
+    public void onSensorChanged(final SensorEvent event) {
+
+    //editable
+        try {
+            final Handler handler = new Handler();
+            for(int x=0; x<9; x=x+1) {
+
+                handler.postDelayed(new Runnable() {
 
 
+                    public void run()
+                    {
+
+                        int v2 = (int) event.values[0];
+                        if(iterator<8) {
+                            if (v2 >= 1000) {
+
+                                //push one to the array
+                                bitstring[iterator] = "1";
+
+                                iterator++;
+                                //display the array
+                                disp_array();
+
+                            } else if (v2 < 1000) {
+
+                                //push zero to the array
+                                bitstring[iterator] = "0";
+
+                                iterator++;
+
+                                //display the array
+                                disp_array();
+
+                            }
+
+                        }
+                        else
+                        {
+                            tst.setText("Text recieved successfully");
+                            SM.unregisterListener(rcv_bit.this, mySense);
+                        }
+
+                    }
+
+                }, 500*x);
+                SM.unregisterListener(rcv_bit.this, mySense);
+
+            }
+
+
+
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //can be reverted to the below code
+
+
+        /*int v2 = (int) event.values[0];
         if(iterator<8) {
             if (v2 >= 1000) {
 
@@ -118,7 +176,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
                 SM.unregisterListener(rcv_bit.this, mySense);
             }
 
-
+        */
     }
 
 
