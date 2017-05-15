@@ -285,7 +285,7 @@ public class Send_new extends AppCompatActivity {
 
                     }
 
-                }, 500*x);
+                }, 1000*x);
 
 
             }

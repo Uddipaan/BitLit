@@ -12,8 +12,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Timer;
+
+import static android.R.attr.x;
+
 
 public class rcv_bit extends AppCompatActivity implements SensorEventListener {
+
 
 
     private Sensor mySense;
@@ -21,7 +26,12 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
     Button btn_strt;
     TextView t, tst;
     public String [] bitstring = new String[8];
+
+
+    int it = 0;
     int iterator = 0;
+
+
     @TargetApi(21)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,42 +51,47 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
         //start button functionality
         btn_strt.setOnClickListener(new View.OnClickListener(){
 
-           @Override
+           //@Override
             public void onClick(View v) {
 
 
-                try {
-                    final Handler handler = new Handler();
+                //final Handler handler = new Handler();
 
-                        handler.postDelayed(new Runnable() {
+                // handler.postDelayed(new Runnable() {
 
 
-                            public void run()
-                            {
-                                //Create Sensor manager
-                                SM = (SensorManager) getSystemService(SENSOR_SERVICE);
-                                //Light sensor
-                                mySense = SM.getDefaultSensor(Sensor.TYPE_LIGHT);
-                                //this requires the main class to implement sensorEventListener
-                                //register listener
+                // public void run()
+                //{
+                //Create Sensor manager
 
-                                SM.registerListener(rcv_bit.this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
-                            }
-                        }, 500);
-                    SM.unregisterListener(rcv_bit.this, mySense);
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
+                SM = (SensorManager) getSystemService(SENSOR_SERVICE);
+                //Light sensor
+                mySense = SM.getDefaultSensor(Sensor.TYPE_LIGHT);
+                //this requires the main class to implement sensorEventListener
+                //register listener
+              int i;
+                for(i=0; i<8; i++) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+
+
+                        public void run() {
+                            delay();
+                            //delay2();
+                            SM.registerListener(rcv_bit.this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
+                            //SM.unregisterListener(rcv_bit.this, mySense);
+                            delay();
+
+                        }
+
+                    }, 1000 * i);
+
+
+
                 }
 
             }
         });
-
-
-
-
-
-
 
 
     }
@@ -84,9 +99,103 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
 
 
 
-    @Override
-    public void onSensorChanged(final SensorEvent event) {
 
+
+
+    public void onSensorChanged( SensorEvent event) {
+
+
+        int v2 = (int) event.values[0];
+
+
+        desp(v2);
+        //SM.unregisterListener(rcv_bit.this, mySense);
+
+
+    }
+
+
+
+
+
+
+public void desp(final int x)
+{
+tst.setText(""+x);
+
+
+    if(iterator<8) {
+        if (x >= 1000) {
+
+            //push one to the array
+            bitstring[iterator] = "1";
+
+            iterator++;
+            //display the array
+            disp_array();
+
+        } else if (x < 1000) {
+
+            //push zero to the array
+            bitstring[iterator] = "0";
+
+            iterator++;
+
+            //display the array
+            disp_array();
+
+        }
+    }
+}
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+
+
+
+
+//this will display the array in the textview
+
+    public void disp_array(){
+
+        t.setText(bitstring[0]+bitstring[1]+bitstring[2]+bitstring[3]+bitstring[4]+bitstring[5]+bitstring[6]+bitstring[7]);
+    }
+    public void delay() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SM.unregisterListener(rcv_bit.this, mySense);
+                //t.setText("Off");
+            it++;
+
+            }
+        }, 10*it);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
+
+        //SM.unregisterListener(rcv_bit.this, mySense);
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+ /*
     //editable
         try {
             final Handler handler = new Handler();
@@ -99,6 +208,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
                     {
 
                         int v2 = (int) event.values[0];
+                        //tst.setText(v2);
                         if(iterator<8) {
                             if (v2 >= 1000) {
 
@@ -127,13 +237,17 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
                             tst.setText("Text recieved successfully");
                             SM.unregisterListener(rcv_bit.this, mySense);
                         }
-
+                        //delay();
+                        //SM.unregisterListener(rcv_bit.this, mySense);
+                        //SM.registerListener(rcv_bit.this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
                     }
-
                 }, 500*x);
-                SM.unregisterListener(rcv_bit.this, mySense);
 
+                //SM.unregisterListener(rcv_bit.this, mySense);
+                //SM.registerListener(rcv_bit.this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
+                //delay();
             }
+
 
 
 
@@ -142,11 +256,12 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
         catch (Exception e) {
             e.printStackTrace();
         }
+*/
 
-        //can be reverted to the below code
+//can be reverted to the below code
 
-
-        /*int v2 = (int) event.values[0];
+/*
+        int v2 = (int) event.values[0];
         if(iterator<8) {
             if (v2 >= 1000) {
 
@@ -169,36 +284,13 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
 
                  }
 
-            }
+           }
             else
             {
                 tst.setText("Text recieved successfully");
                 SM.unregisterListener(rcv_bit.this, mySense);
             }
 
-        */
-    }
+*/
 
 
-
-
-
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-    }
-
-
-
-
-//this will display the array in the textview
-
-    public void disp_array(){
-
-        t.setText(bitstring[0]+bitstring[1]+bitstring[2]+bitstring[3]+bitstring[4]+bitstring[5]+bitstring[6]+bitstring[7]);
-    }
-
-
-
-}

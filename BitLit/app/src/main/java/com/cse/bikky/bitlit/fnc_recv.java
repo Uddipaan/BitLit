@@ -22,7 +22,7 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
     TextView t,t2;
     public String [] bitstring = new String[8];
     int iterator = 0;
-
+    int it = 0;
     @TargetApi(21)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,32 +43,40 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
             public void onClick(View v) {
 
 
-                try {
-                    final Handler handler = new Handler();
-
-                    handler.postDelayed(new Runnable() {
 
 
-                        public void run()
-                        {
                             //Create Sensor manager
                             SM = (SensorManager) getSystemService(SENSOR_SERVICE);
                             //Light sensor
                             mySense = SM.getDefaultSensor(Sensor.TYPE_LIGHT);
                             //this requires the main class to implement sensorEventListener
                             //register listener
+                int i;
+                for(i=0; i<9; i++) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+
+
+                        public void run() {
+                            delay();
+                            //delay2();
                             SM.registerListener(fnc_recv.this, mySense, SensorManager.SENSOR_DELAY_NORMAL);
+                            //SM.unregisterListener(rcv_bit.this, mySense);
+                            delay();
 
                         }
-                    }, 500);
-                    SM.unregisterListener(fnc_recv.this, mySense);
+
+                    }, 1000 * i);
+
 
 
                 }
 
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+
+
+
+
+
 
 
 
@@ -81,91 +89,12 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(final SensorEvent event) {
-        try {
-            final Handler handler = new Handler();
-            for(int x=0; x<9; x=x+1) {
-
-                handler.postDelayed(new Runnable() {
 
 
-                    public void run()
-                    {
-
-                        int v2 = (int) event.values[0];
-                        if(iterator<8) {
-                            if (v2 >= 1000) {
-
-                                //push one to the array
-                                bitstring[iterator] = "1";
-
-                                iterator++;
-                                //display the array
-                                disp_array();
-
-                            } else if (v2 < 1000) {
-
-                                //push zero to the array
-                                bitstring[iterator] = "0";
-
-                                iterator++;
-
-                                //display the array
-                                disp_array();
-
-                            }
-
-                        }
-                        else
-                        {
-                            fnc();
-                            SM.unregisterListener(fnc_recv.this, mySense);
-                        }
-
-                    }
-
-                }, 500*x);
-
-                SM.unregisterListener(fnc_recv.this, mySense);
-            }
-
-
-
-
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        /*
         int v2 = (int) event.values[0];
-        if(iterator<8) {
-            if (v2 >= 1000) {
 
-                //push one to the array
-                bitstring[iterator] = "1";
 
-                iterator++;
-                //display the array
-                disp_array();
-
-            } else if (v2 < 1000) {
-
-                //push zero to the array
-                bitstring[iterator] = "0";
-
-                iterator++;
-                //display the array
-                disp_array();
-
-            }
-
-        }
-        else
-        {
-            fnc();
-            SM.unregisterListener(fnc_recv.this, mySense);
-        }
-
-    */
+        desp(v2);
 
     }
 
@@ -231,4 +160,63 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
                 break;
         }
     }
+
+    public void desp(final int x)
+    {
+
+
+
+        if(iterator<8) {
+            if (x >= 1000) {
+
+                //push one to the array
+                bitstring[iterator] = "1";
+
+                iterator++;
+                //display the array
+                disp_array();
+
+            } else if (x < 1000) {
+
+                //push zero to the array
+                bitstring[iterator] = "0";
+
+                iterator++;
+
+                //display the array
+                disp_array();
+
+            }
+        }
+    else{
+            fnc();
+        }
+
+    }
+
+
+
+
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
+
+        SM.unregisterListener(fnc_recv.this, mySense);
+
+    }
+
+    public void delay() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SM.unregisterListener(fnc_recv.this, mySense);
+                //t.setText("Off");
+                it++;
+
+            }
+        }, 10*it);
+    }
+
 }

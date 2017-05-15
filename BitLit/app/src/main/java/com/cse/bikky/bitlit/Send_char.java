@@ -267,7 +267,7 @@ public class Send_char extends AppCompatActivity {
 
                     }
 
-                }, 500*x);
+                }, 1000*x);
 
 
             }

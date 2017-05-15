@@ -26,7 +26,33 @@
         android:id="@+id/textView4"
         android:layout_height="50dp"
         android:layout_width="150dp"
-        android:layout_centerVertical="true"
+        android:fontFamily="casual"
+        android:gravity="center"
+        android:layout_marginTop="124dp"
         android:layout_centerHorizontal="true"
-        android:fontFamily="sans-serif" />
+        android:textStyle="normal|bold"
+        android:textSize="24sp" />
+
+    <Button
+        android:text="CLEAR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_btn"
+        android:id="@+id/button3"
+        android:fontFamily="casual"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/btn_strt2"
+        android:layout_alignEnd="@+id/btn_strt2" />
+
+    <Button
+        android:text="START"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_btn"
+        android:id="@+id/btn_strt2"
+        android:fontFamily="casual"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp" />
+
 </RelativeLayout>
