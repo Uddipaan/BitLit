@@ -9,18 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.cse.bikky.bitlit.fnc_recv">
 
-    <Button
-        android:text="Start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="90dp"
-        android:id="@+id/btn2strt"
-        android:background="@drawable/round_btn"
-        android:fontFamily="casual"
-        android:textStyle="normal|bold" />
-
     <TextView
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -45,4 +33,27 @@
         android:layout_alignStart="@+id/t2"
         android:fontFamily="casual"
         android:textStyle="normal|bold" />
+
+    <Button
+        android:text="Start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn2strt"
+        android:background="@drawable/round_btn"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/txt2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp" />
+
+    <Button
+        android:text="RESET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:id="@+id/reset"
+        android:background="@drawable/round_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btn2strt"
+        android:layout_alignStart="@+id/btn2strt" />
 </RelativeLayout>

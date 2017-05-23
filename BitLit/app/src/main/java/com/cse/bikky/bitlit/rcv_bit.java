@@ -23,7 +23,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
 
     private Sensor mySense;
     private SensorManager SM;
-    Button btn_strt;
+    Button btn_strt, btn_reset;
     TextView t, tst;
     public String [] bitstring = new String[8];
 
@@ -39,6 +39,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
         setContentView(R.layout.activity_rcv_bit);
 
         btn_strt = (Button)findViewById(R.id.strt);
+        btn_reset = (Button)findViewById(R.id.reset);
 
         t = (TextView)findViewById(R.id.txtvw2);
         tst = (TextView)findViewById(R.id.tst);
@@ -55,13 +56,13 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
             public void onClick(View v) {
 
 
-                //final Handler handler = new Handler();
 
-                // handler.postDelayed(new Runnable() {
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
 
-                // public void run()
-                //{
                 //Create Sensor manager
 
                 SM = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -70,7 +71,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
                 //this requires the main class to implement sensorEventListener
                 //register listener
               int i;
-                for(i=0; i<8; i++) {
+                for(i=0; i<9; i++) {
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
 
@@ -86,13 +87,26 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
 
                     }, 1000 * i);
 
-
-
                 }
 
+                    }
+                }, 1000);
             }
         });
+        btn_reset.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+
+                for(int i = 0; i < 8 ; i++)
+                {
+                    bitstring[i] = " ";
+                }
+                iterator = 0;
+                t.setText(bitstring[0]+bitstring[1]+bitstring[2]+bitstring[3]+bitstring[4]+bitstring[5]+bitstring[6]+bitstring[7]);
+                tst.setText(" ");
+            }
+        });
 
     }
 
@@ -121,7 +135,7 @@ public class rcv_bit extends AppCompatActivity implements SensorEventListener {
 
 public void desp(final int x)
 {
-tst.setText(""+x);
+//tst.setText(""+x);
 
 
     if(iterator<8) {
@@ -145,6 +159,10 @@ tst.setText(""+x);
             disp_array();
 
         }
+    }
+    else
+    {
+        tst.setText("String Received Successfully");
     }
 }
 
@@ -177,13 +195,21 @@ tst.setText(""+x);
         }, 10*it);
     }
 
-    @Override
+
+
+
+
+
+
+
+
+   /* @Override
     public void onPause() {
         super.onPause();  // Always call the superclass method first
 
-        //SM.unregisterListener(rcv_bit.this, mySense);
+        SM.unregisterListener(rcv_bit.this, mySense);
 
-    }
+    }*/
 
 }
 

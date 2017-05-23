@@ -22,18 +22,6 @@
         android:fontFamily="casual"
         android:textStyle="normal|bold" />
 
-    <Button
-        android:text="START"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="89dp"
-        android:id="@+id/strt"
-        android:background="@drawable/round_btn"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:fontFamily="casual"
-        android:textStyle="normal|bold" />
-
     <TextView
         android:layout_width="300dp"
         android:layout_height="50dp"
@@ -46,5 +34,28 @@
         android:layout_alignStart="@+id/tst"
         android:fontFamily="casual"
         android:textStyle="normal|bold" />
+
+    <Button
+        android:text="START"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/strt"
+        android:background="@drawable/round_btn"
+        android:fontFamily="casual"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/txtvw2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp" />
+
+    <Button
+        android:text="RESET"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/strt"
+        android:layout_alignEnd="@+id/strt"
+        android:layout_marginBottom="47dp"
+        android:id="@+id/reset"
+        android:background="@drawable/round_btn" />
 
 </RelativeLayout>

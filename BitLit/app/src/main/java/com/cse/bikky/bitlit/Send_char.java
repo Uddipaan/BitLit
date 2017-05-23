@@ -187,7 +187,13 @@ public class Send_char extends AppCompatActivity {
 
 
 
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
 
+        turnOffFlash();
+
+    }
 
 
 
@@ -263,7 +269,7 @@ public class Send_char extends AppCompatActivity {
                         temp=m;
                         t.setText("Sending element "+temp+" of the string.");
 
-                        delay();
+
 
                     }
 
@@ -271,7 +277,7 @@ public class Send_char extends AppCompatActivity {
 
 
             }
-
+            delay();
             m=0;
 
 
@@ -296,7 +302,7 @@ public class Send_char extends AppCompatActivity {
                 t.setText("Sending Completed Successfully!");
 
             }
-        }, 4000);
+        }, 8000);
     }
 
 

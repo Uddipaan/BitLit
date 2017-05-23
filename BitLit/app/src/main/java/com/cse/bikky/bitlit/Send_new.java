@@ -251,7 +251,7 @@ public class Send_new extends AppCompatActivity {
                 turnOffFlash();
                 test.setText("Sending Completed Successfully!");
             }
-        }, 4000);
+        }, 8000);
     }
 
 
@@ -281,7 +281,7 @@ public class Send_new extends AppCompatActivity {
                         temp=m+1;
                         test.setText("Sending element "+temp+" of the string.");
                         m++;
-                        delay();
+
 
                     }
 
@@ -289,7 +289,7 @@ public class Send_new extends AppCompatActivity {
 
 
             }
-
+            delay();
             m=0;
 
 
@@ -301,7 +301,13 @@ public class Send_new extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
 
+        turnOffFlash();
+
+    }
 
     /*
     //DUMP

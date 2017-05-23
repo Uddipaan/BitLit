@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class fnc_recv extends AppCompatActivity implements SensorEventListener {
     private Sensor mySense;
     private SensorManager SM;
-    Button btn_strt;
+    Button btn_strt, btn_reset;
     TextView t,t2;
     public String [] bitstring = new String[8];
     int iterator = 0;
@@ -30,6 +30,7 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
         setContentView(R.layout.activity_fnc_recv);
 
         btn_strt = (Button)findViewById(R.id.btn2strt);
+        btn_reset = (Button)findViewById(R.id.reset);
 
         t = (TextView)findViewById(R.id.txt2);
         t2 = (TextView)findViewById(R.id.t2);
@@ -41,6 +42,13 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
 
             @Override
             public void onClick(View v) {
+
+
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
 
 
 
@@ -67,22 +75,27 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
                         }
 
                     }, 1000 * i);
-
-
-
                 }
-
-
-
-
-
-
-
-
-
-
+                }
+            }, 1000);
             }
         });
+
+        btn_reset.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                for(int i = 0; i < 8 ; i++)
+                {
+                    bitstring[i] = " ";
+                }
+                iterator = 0;
+                t.setText(bitstring[0]+bitstring[1]+bitstring[2]+bitstring[3]+bitstring[4]+bitstring[5]+bitstring[6]+bitstring[7]);
+                t2.setText(" ");
+            }
+        });
+
 
 
     }
@@ -108,7 +121,8 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
 
     public void disp_array(){
 
-        t.setText(bitstring[0]+bitstring[1]+bitstring[2]+bitstring[3]+bitstring[4]+bitstring[5]+bitstring[6]+bitstring[7]);
+       //.setText(bitstring[0]+bitstring[1]+bitstring[2]+bitstring[3]+bitstring[4]+bitstring[5]+bitstring[6]+bitstring[7]);
+        t.setText("Please wait ...");
     }
 
 
@@ -147,16 +161,21 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
 
         switch(res){
             case "[1, 0, 1, 0, 1, 0, 1, 0]":
+                t.setText(" ");
                 openMsg();
                 break;
             case "[0, 1, 0, 1, 0, 1, 0, 1]":
+                t.setText(" ");
                 openGlry();
                 break;
             case "[1, 1, 1, 1, 0, 0, 0, 0]":
+                t.setText(" ");
                 openCntc();
                 break;
             default:
-                t2.setText("Unidentified String Detected!");
+                t.setText(" ");
+                t2.setText("Unidentified Signal Detected! \nPlease Try Again.");
+                SM.unregisterListener(fnc_recv.this, mySense);
                 break;
         }
     }
@@ -197,14 +216,14 @@ public class fnc_recv extends AppCompatActivity implements SensorEventListener {
 
 
 
-    @Override
+   /* @Override
     public void onPause() {
         super.onPause();  // Always call the superclass method first
 
         SM.unregisterListener(fnc_recv.this, mySense);
 
     }
-
+*/
     public void delay() {
 
         final Handler handler = new Handler();

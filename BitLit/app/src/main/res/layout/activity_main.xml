@@ -11,17 +11,6 @@
     android:background="?attr/colorButtonNormal">
 
     <Button
-        android:text="EXIT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button_send"
-        android:layout_toEndOf="@+id/button_send"
-        android:layout_marginBottom="73dp"
-        android:id="@+id/button_exit"
-        android:background="@color/colorAccent" />
-
-    <Button
         android:text="SEND"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -48,7 +37,7 @@
         android:fontFamily="casual" />
 
     <Button
-        android:text="SEND NEW"
+        android:text="SEND"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/send"
@@ -62,7 +51,7 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="RECIEVE"
+        android:text="RECEIVE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button_recieve"
@@ -75,7 +64,7 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="RECV NEW"
+        android:text="RECEIVE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/send"
@@ -85,4 +74,49 @@
         android:background="@drawable/round_btn"
         android:fontFamily="casual"
         android:textStyle="normal|bold" />
+
+    <TextView
+        android:text="BITS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button_recieve"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp"
+        android:id="@+id/textView2"
+        android:textSize="24sp"
+        android:fontFamily="casual" />
+
+    <TextView
+        android:text="BYTES"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:textSize="24sp"
+        android:fontFamily="casual"
+        android:layout_alignBaseline="@+id/btn_rcvnw"
+        android:layout_alignBottom="@+id/btn_rcvnw"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="INFO"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ppl"
+        android:background="@color/colorAccent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:visibility="visible"
+        android:elevation="24dp" />
+
+    <Button
+        android:text="EXIT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_exit"
+        android:background="@color/colorAccent"
+        android:layout_above="@+id/ppl"
+        android:layout_toRightOf="@+id/send"
+        android:layout_toEndOf="@+id/send"
+        android:elevation="24dp" />
 </RelativeLayout>
