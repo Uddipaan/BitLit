@@ -24,6 +24,7 @@ public class Send_new extends AppCompatActivity {
     private Button btn_1, btn_0, btn_clr, btn_send;
     public String [] bitstring = new String[8];
     public int n = -1;
+    public int hamm[] = new int[12];
     private CameraManager mCameraManager;
     private String mCameraId;
     private boolean hasFlash;
@@ -69,6 +70,9 @@ public class Send_new extends AppCompatActivity {
             bitstring[i] = " ";
         }
 
+        for (int i = 0; i < 12; i++) {
+            hamm[i] = 0;
+        }
 
         btn_1.setOnClickListener(new View.OnClickListener() {
 
@@ -137,19 +141,65 @@ public class Send_new extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                sendbit();
+                if(n==7)
+                {
+                    hamming();
+                    sendbit();
+                }
+                else
+                {
+                    sendbit2();
+                }
 
             }
         });
 
 
-
-
-
-
-
     }
 
+    public void hamming()
+    {
+        int p1=0;
+        int p2=0;
+        int d3=0;
+        int p4=0;
+        int d5=0;
+        int d6=0;
+        int d7=0;
+        int p8=0;
+        int d9=0;
+        int d10=0;
+        int d11=0;
+        int d12=0;
+
+        d3 = Integer.parseInt(bitstring[0]);
+        d5 = Integer.parseInt(bitstring[1]);
+        d6 = Integer.parseInt(bitstring[2]);
+        d7 = Integer.parseInt(bitstring[3]);
+        d9 = Integer.parseInt(bitstring[4]);
+        d10 = Integer.parseInt(bitstring[5]);
+        d11 = Integer.parseInt(bitstring[6]);
+        d12 = Integer.parseInt(bitstring[7]);
+
+        p1 = d3^d5^d7^d9^d11;
+        p2 = d3^d6^d7^d10^d11;
+        p4 = d5^d6^d7^d12;
+        p8 = d9^d10^d11^d12;
+
+        hamm[0]=p1;
+        hamm[1]=p2;
+        hamm[2]=d3;
+        hamm[3]=p4;
+        hamm[4]=d5;
+        hamm[5]=d6;
+        hamm[6]=d7;
+        hamm[7]=p8;
+        hamm[8]=d9;
+        hamm[9]=d10;
+        hamm[10]=d11;
+        hamm[11]=d12;
+
+    }
 
     public void one_input()
     {
@@ -251,7 +301,7 @@ public class Send_new extends AppCompatActivity {
                 turnOffFlash();
                 test.setText("Sending Completed Successfully!");
             }
-        }, 8000);
+        }, 12000);
     }
 
 
@@ -259,7 +309,7 @@ public class Send_new extends AppCompatActivity {
 
         try {
             final Handler handler = new Handler();
-            for(int x=0; x<bitstring.length; x=x+1) {
+            for(int x=0; x<hamm.length; x=x+1) {           //for(int x=0; x<bitstring.length; x=x+1)
 
                 handler.postDelayed(new Runnable() {
 
@@ -267,19 +317,19 @@ public class Send_new extends AppCompatActivity {
                     public void run()
                     {
 
-                        if(bitstring[m]=="1")
+                        if(hamm[m]==1)               //if(bitstring[m]=="1")
                         {
                             turnOnFlash();
 
                         }
-                        else if(bitstring[m]=="0")
+                        else if(hamm[m]==0)          //if(bitstring[m]=="0")
                         {
                             turnOffFlash();
                         }
 
-                        int temp;
-                        temp=m+1;
-                        test.setText("Sending element "+temp+" of the string.");
+                                                    //int temp;
+                                                    //temp=m+1;
+                        test.setText("Hamm{"+m+"] ="+hamm[m]);   //test.setText("Sending element "+temp+" of the string.");
                         m++;
 
 
@@ -309,6 +359,64 @@ public class Send_new extends AppCompatActivity {
 
     }
 
+
+
+    public void sendbit2(){
+
+        try {
+            final Handler handler = new Handler();
+            for(int x=0; x<n+1; x=x+1) {
+
+                handler.postDelayed(new Runnable() {
+
+
+                    public void run()
+                    {
+
+                        if(bitstring[m]=="1")
+                        {
+                            turnOnFlash();
+
+                        }
+                        else if(bitstring[m]=="0")
+                        {
+                            turnOffFlash();
+                        }
+
+                        int temp;
+                        temp=m+1;
+                        test.setText("Sending element "+temp+" of the string.");
+                        m++;
+
+
+                    }
+
+                }, 1000*x);
+
+
+            }
+            delay2();
+            m=0;
+
+
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void delay2() {
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                turnOffFlash();
+                test.setText("Sending Completed Successfully!");
+            }
+        }, (n+1)*1000);
+    }
     /*
     //DUMP
 

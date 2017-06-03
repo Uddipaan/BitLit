@@ -58,4 +58,15 @@
         android:id="@+id/reset"
         android:background="@drawable/round_btn" />
 
+    <Button
+        android:text="Benchmark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:id="@+id/bnch"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/colorPrimary" />
+
 </RelativeLayout>
